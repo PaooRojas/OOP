@@ -7,20 +7,10 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Paola yo = new Paola();
-
-        Yorleny mama = new Yorleny("Hola");
-
-        mama.setAge();
-
-        int age = mama.getAge();
-        System.out.println("My age is" + age);
-        System.out.println("Amo" + mama.getHobby());
-
-
-        System.out.println("Chao" + age);
+        Paola yo = new Paola("Hello", 22, "Drink coffee");
+        Yorleny mama = new Yorleny("Hola", 46, "Sleep");
+        System.out.println("Chao clase" + mama);
     }
 }
-
 
 

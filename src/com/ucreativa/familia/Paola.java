@@ -1,8 +1,9 @@
 package com.ucreativa.familia;
 
-    public class Paola {
+    public class Paola extends Yorleny {
 
-        public Paola(){
-            System.out.println("Hola soy Paola, buenas noches");
+        public Paola(String saludo, int age, String hobby) {
+            super(saludo, age, hobby);
         }
     }
+
