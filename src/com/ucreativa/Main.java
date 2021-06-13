@@ -1,33 +1,61 @@
 package com.ucreativa;
 
 import com.ucreativa.vacunacion.entities.Amigo;
-import com.ucreativa.vacunacion.entities.BitacuraVacunas;
 import com.ucreativa.vacunacion.entities.Familiar;
 import com.ucreativa.vacunacion.entities.Persona;
+import com.ucreativa.vacunacion.repositories.InMemoryRepository;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
-        Familiar mama = new Familiar("Yorleny", "1234", 46, false,"mama");
-        Familiar hermana = new Familiar("Johanna", "4567", 25, false, "hermana");
-        Amigo vecino = new Amigo("Anthony", "8901", 24, false, "vecino", "Tony");
+        Scanner in = new Scanner(System.in);
 
-        List<Persona> familia = new ArrayList<>();
-        familia.add(mama);
-        familia.add(hermana);
-        familia.add(vecino);
+        InMemoryRepository repo = new InMemoryRepository();
 
-        List<BitacuraVacunas> bitacora = new ArrayList<>();
-        bitacora.add(new BitacuraVacunas(mama, "ninguno", "Pfzier", 1,new Date()));
-        bitacora.add(new BitacuraVacunas(hermana, "ninguno", "Johnson", 2, new Date()));
-        bitacora.add(new BitacuraVacunas(vecino, "ninguno", "Pfzier", 1, new Date()));
+        while (true) {
+            String nombre, cedula, edad, riesgo, isAmigo, relacion, facebook, parentesco, marca, sintomas, dosis, print;
+            Persona persona;
+            System.out.println("Nombre");
+            nombre = in.nextLine();
+            System.out.println("Cedula");
+            cedula = in.nextLine();
+            System.out.println("Edad");
+            edad = in.nextLine();
+            System.out.println("Riesgo(S/N):");
+            riesgo = in.nextLine();
+            System.out.println("Amigo(A)/ Familiar (F):");
+            isAmigo = in.nextLine();
+            if (isAmigo.equals("A")) {
+                System.out.println("Relacion");
+                relacion = in.nextLine();
+                System.out.println("Facebook");
+                facebook = in.nextLine();
+                persona = new Amigo(nombre, cedula, Integer.parseInt(edad), riesgo.equals("S"), relacion, facebook);
+            } else {
+                System.out.println("Parentesco");
+                parentesco = in.nextLine();
+                persona = new Familiar(nombre, cedula, Integer.parseInt(edad), riesgo.equals("S"), parentesco);
+            }
+            System.out.println("Vacuna -- Marca:");
+            marca = in.nextLine();
+            System.out.println("Vacuna -- Sintomas:");
+            sintomas = in.nextLine();
+            System.out.println("Vacuna -- Dosis:");
+            dosis = in.nextLine();
 
+            repo.save(persona, sintomas, marca, Integer.parseInt(dosis), new Date());
 
+            System.out.println("¿Quiere imprimir lista? (S)");
+            print = in.nextLine();
+            if (print.equals("S")) {
+                for (String item : repo.get()) {
+                    System.out.println(item);
+                }
+            }
+        }
     }
+
 }
-
-
