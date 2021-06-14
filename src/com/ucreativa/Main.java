@@ -3,7 +3,9 @@ package com.ucreativa;
 import com.ucreativa.vacunacion.entities.Amigo;
 import com.ucreativa.vacunacion.entities.Familiar;
 import com.ucreativa.vacunacion.entities.Persona;
+import com.ucreativa.vacunacion.repositories.FileRepository;
 import com.ucreativa.vacunacion.repositories.InMemoryRepository;
+import com.ucreativa.vacunacion.repositories.Repository;
 
 import java.util.Date;
 import java.util.Scanner;
@@ -13,7 +15,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
 
-        InMemoryRepository repo = new InMemoryRepository();
+        Repository repo = new FileRepository();
 
         while (true) {
             String nombre, cedula, edad, riesgo, isAmigo, relacion, facebook, parentesco, marca, sintomas, dosis, print;
