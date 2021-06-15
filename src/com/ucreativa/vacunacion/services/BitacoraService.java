@@ -13,13 +13,14 @@ public class BitacoraService {
     public BitacoraService(Repository repository){
         this.repository = repository;
     }
-    public void save(String nombre, String cedula, String txtEdad, String txtriesgo,String txtisAmigo,String relacion,String facebook,String parentesco,String marca,String sintomas,String txtdosis) {
+    public void save(String nombre, String cedula, String txtEdad,
+                     boolean riesgo,boolean isAmigo,String relacion,
+                     String facebook,String parentesco,String marca,
+                     String sintomas,String txtdosis) {
         int edad = Integer.parseInt(txtEdad);
         int dosis = Integer.parseInt(txtdosis);
-        boolean isAmigo = txtisAmigo.equals("S");
-        boolean riesgo = txtriesgo.equals("S");
         Persona persona;
-        if (isAmigo) {
+        if (isAmigo){
             persona = new Amigo(nombre, cedula, edad, riesgo, relacion, facebook);
         } else {
             persona = new Familiar(nombre, cedula, edad, riesgo, parentesco);
