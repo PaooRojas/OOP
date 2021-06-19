@@ -21,7 +21,7 @@ public class FrontEnd extends JFrame {
     }
     private void construccionPantalla(){
         super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        super.setSize(400,208);
+        super.setSize(400,200);
         super.setLayout(new GridLayout(5,2));
 
     }
@@ -75,32 +75,39 @@ public class FrontEnd extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 BitacoraService service = new BitacoraService(new FileRepository());
-                service.save(txtNombre.getText(),
-                        txtCedula.getText(),
-                        txtEdad.getText(),
-                        txtRiesgo.isSelected(),
-                        txtEsAmigo.isSelected(),
-                        txtRelacion.getText(),
-                        txtFacebook.getText(),
-                        txtParentesco.getText(),
-                        txtMarca.getText(),
-                        txtSintomas.getText(),
-                        txtDosis.getText());
+                try {
+                    service.save(txtNombre.getText(),
+                            txtCedula.getText(),
+                            txtEdad.getText(),
+                            txtRiesgo.isSelected(),
+                            txtEsAmigo.isSelected(),
+                            txtRelacion.getText(),
+                            txtFacebook.getText(),
+                            txtParentesco.getText(),
+                            txtMarca.getText(),
+                            txtSintomas.getText(),
+                            txtDosis.getText());
 
-                txtNombre.setText("");
-                txtCedula.setText("");
-                txtEdad.setText("");
-                txtRiesgo.setText("");
-                txtEsAmigo.setText("");
-                txtRelacion.setText("");
-                txtFacebook.setText("");
-                txtParentesco.setText("");
-                txtMarca.setText("");
-                txtSintomas.setText("");
-                txtDosis.setText("");
+                    txtNombre.setText("");
+                    txtCedula.setText("");
+                    txtEdad.setText("");
+                    txtRiesgo.setText("");
+                    txtEsAmigo.setText("");
+                    txtRelacion.setText("");
+                    txtFacebook.setText("");
+                    txtParentesco.setText("");
+                    txtMarca.setText("");
+                    txtSintomas.setText("");
+                    txtDosis.setText("");
 
-                String reporte = String.join("\n",service.get());
-                JOptionPane.showMessageDialog(((JButton)e.getSource()).getParent(),reporte);
+                    String reporte = String.join("\n",service.get());
+                    JOptionPane.showMessageDialog(((JButton)e.getSource()).getParent(),reporte);
+
+                } catch (ErrorEnEdadException | ErrorEnDosisException errorEnEdadException) {
+                    errorEnEdadException.printStackTrace();
+
+                }
+
 
             }
         });

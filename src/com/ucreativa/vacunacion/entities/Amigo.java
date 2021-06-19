@@ -13,9 +13,10 @@ public class Amigo extends Persona {
 
     public String getRelacion() {
         return relacion;
+
     }
 
-    public String getFacebook() {
-        return facebook;
+    public void setRelacion(String relacion) {
+        this.relacion = relacion;
     }
 }

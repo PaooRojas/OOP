@@ -10,7 +10,7 @@ import java.util.List;
 
 public class InMemoryRepository implements Repository {
 
-    private List<BitacuraVacunas> db;
+    private final List<BitacuraVacunas> db;
 
     public InMemoryRepository() {
         this.db = new ArrayList<>();
